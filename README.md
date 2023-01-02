@@ -20,3 +20,5 @@ Enable Feign Client and Create a class and setup the Service on which you want t
 Added Feigh decoder to decode errors.
 
 Installed Docker -> Install OpenZipkin Image -> For request tracing
+
+Added Rest Template
