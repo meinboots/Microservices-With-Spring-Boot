@@ -1,5 +1,6 @@
-package com.mutantstore.payment.service.model;
+package com.mutantstore.order.service.external.response;
 
+import com.mutantstore.order.service.model.PaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

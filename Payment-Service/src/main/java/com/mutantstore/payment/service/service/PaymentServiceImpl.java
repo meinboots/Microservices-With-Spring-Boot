@@ -1,7 +1,9 @@
 package com.mutantstore.payment.service.service;
 
 import com.mutantstore.payment.service.entity.TransactionDetails;
+import com.mutantstore.payment.service.model.PaymentMode;
 import com.mutantstore.payment.service.model.PaymentRequest;
+import com.mutantstore.payment.service.model.PaymentResponse;
 import com.mutantstore.payment.service.repository.TransactionDetailsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,22 @@ public class PaymentServiceImpl implements PaymentService{
         log.info("Transaction is completed with Id : 😒😒😒  {}", transactionDetails.getId());
 
         return transactionDetails.getId();
+    }
+
+    @Override
+    public PaymentResponse getPaymentDetailsByOrderId(Long orderId) {
+
+        log.info("Getting payment details for the orderId : {}", orderId);
+
+        TransactionDetails transactionDetails = transactionDetailsRepository.findByOrderId(orderId);
+
+        return PaymentResponse.builder()
+                .paymentId(transactionDetails.getId())
+                .status(transactionDetails.getPaymentStatus())
+                .paymentMode(PaymentMode.valueOf(transactionDetails.getPaymentMode()))
+                .paymentDate(transactionDetails.getPaymentDate())
+                .orderId(transactionDetails.getOrderId())
+                .amount(transactionDetails.getAmount())
+                .build();
     }
 }
